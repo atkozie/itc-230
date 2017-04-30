@@ -1,0 +1,18 @@
+<html>
+    <body>
+        
+        <a href="/">Home</a><!--all the same base URL!-->
+        
+{{#if gotten}}<!--can't put spaces in these curly braces before the code...-->
+    <h2>{{ title }} details</h2>
+    <li>Title: {{ gotten.title }}</li>
+    <li>Author: {{ gotten.author }}</li>
+    <li>Date Published: {{ gotten.pubdate }}</li>
+    <p><a href="/delete?title={{ gotten.title }}">Delete</a></p><!--link to the /delete?querystring to delete the title-->
+        
+{{ else }}<!--if title not here...-->
+        <h2>error: title "{{ title }}" not found</h2>
+{{/if}}
+
+    </body>
+</html>
