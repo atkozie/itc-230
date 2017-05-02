@@ -1,15 +1,18 @@
 <html>
+    <head>
+    <title>Delete View</title>
+    </head>
     <body>
         
-        <a href="/">Home</a><!--all the same base URL!-->
+        <a href="/">Home</a>
         
 {{#if del.deleted}}
     <h2>The title "{{ title }}" has been deleted</h2>
-    <h3>There are {{ del.total }} titles remaining</h3>
+    <h3>There are a total of {{ del.total }} titles remaining</h3>
         
 {{ else }}
     <h2>error: title "{{ title }}" not found</h2>
 {{/if}}
-
+        
     </body>
 </html>
