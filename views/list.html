@@ -1,0 +1,14 @@
+<h2>Books in our list:</h2>
+        
+{{! here is a server-side comment}}
+    
+{{#each books}}
+   <h3>Title: {{title}}</h3> 
+<ul>
+    <li>Author: {{author}}</li> 
+    <li>Genre: {{genre}}</li> 
+    <li>Date published: {{pubdate}}</li> 
+</ul>
+
+{{/each}}
+         

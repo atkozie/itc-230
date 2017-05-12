@@ -1,25 +1,5 @@
-<!--
-<html>
-    <head>
-    <title>Home</title>
-        
-        <style>
-            
-        body {
-            background-color:pink;
-        }
-            
-    </style>
-        
-    </head>
-    
-    
-    
-<body>
--->
-    
-<h2>Homepage</h2>
-    
+<h2>Home</h2>
+   
 <form method="POST" action="/get"><!--POST the data, to url with /get-->
     <input type="text" name="title" placeholder="title" maxlength="100" required>
     <button>Search</button>
@@ -35,5 +15,17 @@
     <input type="text" name="pubdate" placeholder="year published" maxlength="100" required>
     <button>Add Book</button>
 </form>
+
+<h2>Books in our list:</h2>
+{{#if books}}
+    {{#each books}}
+       <h3>Title: {{title}}</h3>
+        <form method="POST" action="/get">
+            <input type="submit" name="{{title}}" value="view title details" />
+        </form>
+    {{/each}}
+{{else}} <!--if no books-->
+    <h3>Sorry, we currently have no books in our array!</h3>
+{{/if}}
     
-</body>
+{{! here is a server-side comment}}
