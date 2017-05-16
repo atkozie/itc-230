@@ -19,10 +19,7 @@
 <h2>Books in our list:</h2>
 {{#if books}}
     {{#each books}}
-       <h3>Title: {{title}}</h3>
-        <form method="POST" action="/get">
-            <input type="submit" name="{{title}}" value="view title details" />
-        </form>
+        <h3>Title: <a href="/get/{{title}}">{{title}}</a></h3>
     {{/each}}
 {{else}} <!--if no books-->
     <h3>Sorry, we currently have no books in our array!</h3>

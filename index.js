@@ -35,14 +35,27 @@ app.get('/list', function(req,res){
 //about page is sent as a plain text response
 app.get('/about', function(req,res){
     res.type('text/plain');
-    res.send('This is the About page. It was rendered entirely in the server file');
+    res.send('This is the About page. It was rendered entirely within the server file');
 });
 
 //POST - using body-parser plugin
-app.post('/get', function(req,res){//URL will have /get? followed by querystring
+//this is the search button functionality
+app.post('/get', function(req,res){
     let gotten = book.get(req.body.title);
     res.render("details", {gotten: gotten});
 });
+
+//this is the lick on a title functionality on the homepage
+app.get('/get/:title', function(req, res){
+    res.type('text/html');
+    
+   var gotten = book.get(req.params.title);
+    if(!gotten) {
+        found = {title: req.params.title}; 
+              }
+   res.render("details", {gotten: gotten, title: req.params.title});
+});
+
 
 // handle deletion with a GET
 app.get('/delete', function(req,res){//URL will have /delete? followed by querystring
