@@ -1,3 +1,9 @@
+# Database Credentials
+lib/credentials.js
+
+# Mongo
+mongodb/*
+
 # Logs
 logs
 *.log
@@ -36,8 +42,8 @@ jspm_packages
 # Optional REPL history
 .node_repl_history
 
-<<<<<<< HEAD
-models/book.js
-=======
-models/book.js
->>>>>>> d66749c1d77743f55ee94b653fa45bf4b8ca5ddc
+# <<<<<<< HEAD
+# models/book.js
+# =======
+# models/book.js
+# >>>>>>> d66749c1d77743f55ee94b653fa45bf4b8ca5ddc

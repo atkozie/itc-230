@@ -4,10 +4,10 @@
 const express = require("express");
 const app = express();
 const handlebars = require('express-handlebars');
+//const book = require('./lib/book.js'); // we need the array from the other file
+const Book = require('./models/book.js');
 
 app.set('port', process.env.PORT || 3000);
-
-const book = require('./lib/book.js'); // we need the array from the other file
 
 app.use(express.static(__dirname + '/public')); //path for static pages
 app.use(require('body-parser').urlencoded({extended: true})); //this parses the POSTed form submissions
@@ -16,6 +16,13 @@ app.use(require('body-parser').urlencoded({extended: true})); //this parses the 
 app.engine(".html", handlebars({extname: '.html', defaultLayout: 'main'}));
 app.set("view engine", ".html");
 
+// home page w/ the database connection
+app.get('/', (req,res) => {
+    Book.find((err,books) => {
+        if (err) return next(err);
+        res.render('home', {books: books });    
+    })
+});
 
 //the pages
 //Route handlers are specified with app.get() or app.post(), & error handlers w/ app.use():
@@ -26,11 +33,18 @@ app.get('/', function(req,res){
     res.render('home', {books: book.getAll()}); //passing the getAll from book, as books
 });
 
+//app.get('/list', function(req,res){
+//    res.type('text/html');
+////    res.sendFile(__dirname + '/public/home.html'); //old code from pre-templating
+//    res.render('list', {books: book.getAll()}); //passing the getAll from book, as books
+//});
+
 app.get('/list', function(req,res){
-    res.type('text/html');
-//    res.sendFile(__dirname + '/public/home.html'); //old code from pre-templating
-    res.render('list', {books: book.getAll()}); //passing the getAll from book, as books
-});
+    Book.find((err,books) => {
+        if (err) return (err);
+        res.render('list', {books: books })
+        });
+    });
 
 //about page is sent as a plain text response
 app.get('/about', function(req,res){
@@ -38,24 +52,40 @@ app.get('/about', function(req,res){
     res.send('This is the About page. It was rendered entirely within the server file');
 });
 
-//POST - using body-parser plugin
-//this is the search button functionality
-app.post('/get', function(req,res){
-    let gotten = book.get(req.body.title);
-    res.render("details", {gotten: gotten});
-});
+////POST - using body-parser plugin
+////this is the search button functionality with the array/library file
+//app.post('/get', function(req,res){
+//    let gotten = book.get(req.body.title);
+//    res.render("details", {gotten: gotten});
+//});
+//
+////this is the lick on a title functionality on the homepage
+////here we use get instead of post, and params rather than body
+//app.get('/get/:title', function(req, res){
+//    res.type('text/html');
+//   var gotten = book.get(req.params.title);
+//    if(!gotten) {
+//        found = {title: req.params.title}; 
+//        }
+//   res.render("details", {gotten: gotten, title: req.params.title});
+//});
 
-//this is the lick on a title functionality on the homepage
-app.get('/get/:title', function(req, res){
-    res.type('text/html');
-    
-   var gotten = book.get(req.params.title);
-    if(!gotten) {
-        found = {title: req.params.title}; 
-              }
-   res.render("details", {gotten: gotten, title: req.params.title});
+// begin database details routes
+app.get('/get', (req,res,next) => {
+    Book.findOne({ title:req.query.title }, (err, book) => {
+        if (err) return next(err);
+        res.type('text/html');
+        res.render('details', {result: book} ); 
+    });
 });
-
+app.post('/get', (req,res, next) => {
+    Book.findOne({ title:req.body.title }, (err, book) => {
+        if (err) return next(err);
+        res.type('text/html');
+        res.render('details', {result: book} ); 
+    });
+});
+// end database details routes
 
 // handle deletion with a GET
 app.get('/delete', function(req,res){//URL will have /delete? followed by querystring

@@ -1,10 +1,10 @@
-{{#if gotten}}
-    <h2>Details for {{ gotten.title }}</h2>
-    <li>Title: {{ gotten.title }}</li>
-    <li>Author: {{ gotten.author }}</li>
-    <li>Genre: {{ gotten.genre }}</li>
-    <li>Date Published: {{ gotten.pubdate }}</li>
-    <h3><a href="/delete?title={{ gotten.title }}">Delete this title</a></h3><!--link to the /delete?querystring to delete the title-->
+{{#if result}}
+    <h2>Details for {{ result.title }}</h2>
+    <li>Title: {{ result.title }}</li>
+    <li>Author: {{ result.author }}</li>
+    <li>Genre: {{ result.genre }}</li>
+    <li>Date Published: {{ result.pubdate }}</li>
+    <h3><a href="/delete?title={{ result.title }}">Delete this title</a></h3><!--link to the /delete?querystring to delete the title-->
         
 {{ else }}<!--if title not here...-->
         <h2>error: title "{{ title }}" not found</h2>
