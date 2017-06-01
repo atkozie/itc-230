@@ -1,16 +1,26 @@
 {
   "name": "ITC230",
   "version": "1.0.0",
-  "description": "",
+  "description": "app for ITC230 Advanced JavaScript class at Seattle Central College",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+      "itc230",
+      "node",
+      "express",
+      "handlebars",
+      "javascript"
+  ],
+  "author": "Adam Kozie",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.17.1",
+    "cheerio": "^1.0.0-rc.1",
+    "cors": "^2.8.3",
     "express": "^4.15.2",
+    "express-handlebars": "^3.0.0",
     "mongoose": "^4.9.8"
   },
   "devDependencies": {
