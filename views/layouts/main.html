@@ -1,10 +1,31 @@
-{{> header}}
-{{> nav}}
-
-<div class="content">
-        
-    {{{body}}}      
+<!doctype>
+<html>
+    <head> 
+        <title>ITC230 Book App</title>
+    </head>
     
-</div>
-
-{{> footer}}
+    <body>
+        <div class="content">
+        
+            <h2>This is the Main View</h2>
+            
+            {{{body}}}
+            
+            <div class="nav">
+    
+                {{#if books}}
+                <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About</a></li>
+                </ul>
+                {{else}}
+                
+                {{/if}}
+                
+            </div><!--end nav-->
+            
+        </div><!--end content-->
+        
+        <footer>&copy; Adam Kozie 2017</footer>
+        
+    </body>
